@@ -102,11 +102,7 @@ CREATE TABLE IF NOT EXISTS Manufacturers
 
 (
   ManufacturerID INT AUTO_INCREMENT PRIMARY KEY,
-
-  
   Name VARCHAR(100) NOT NULL,
-
-  
   Country VARCHAR(100) NOT NULL
 );
 
