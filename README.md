@@ -90,16 +90,18 @@
 - **Description:** A stored procedure to delete a car record by its ID.
 
 # Step 1: Create the database
-**CREATE DATABASE IF NOT EXISTS GlobalCarDetails;**
+CREATE DATABASE IF NOT EXISTS 
+GlobalCarDetails;
 
 # Step 2: Use the database
-**USE GlobalCarDetails;**
+USE GlobalCarDetails;
 
--- Step 3: Create the Manufacturers table
-CREATE TABLE IF NOT EXISTS Manufacturers (
-    ManufacturerID INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(100) NOT NULL,
-    Country VARCHAR(100) NOT NULL
+# Step 3: Create the Manufacturers table
+CREATE TABLE IF NOT EXISTS Manufacturers 
+(
+  ManufacturerID INT AUTO_INCREMENT PRIMARY KEY,
+  Name VARCHAR(100) NOT NULL,
+  Country VARCHAR(100) NOT NULL
 );
 
 -- Step 4: Create the Models table
