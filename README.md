@@ -818,8 +818,12 @@ END //
 
 DELIMITER ;
 
+
+
 # Executing the update procedure to increase prices for cars manufactured in or after 2015 by $500,000
 CALL UpdateCarPrices(2015, 500000);
 
 
+# Conclusion:
 
+This SQL-based car sales database project provided a structured approach to managing and analyzing data related to car manufacturers, models, and sales. Through the use of various SQL queries and techniques, valuable business insights were drawn from the dataset. The project showcased how databases can be effectively used to store large amounts of structured data and how querying this data can assist in decision-making processes for businesses.
