@@ -119,7 +119,9 @@ CREATE TABLE IF NOT EXISTS Models
 # Step 5: Create the Cars table
 CREATE TABLE IF NOT EXISTS Cars
 (
+
     CarID INT AUTO_INCREMENT PRIMARY KEY,
+    
     
     ManufacturerID INT,
     
