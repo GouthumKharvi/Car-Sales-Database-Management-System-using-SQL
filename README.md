@@ -91,6 +91,7 @@
 
 # Step 1: Create the database
 CREATE DATABASE IF NOT EXISTS 
+
 GlobalCarDetails;
 
 # Step 2: Use the database
@@ -119,12 +120,19 @@ CREATE TABLE IF NOT EXISTS Models
 CREATE TABLE IF NOT EXISTS Cars
 (
     CarID INT AUTO_INCREMENT PRIMARY KEY,
+    
     ManufacturerID INT,
+    
     ModelID INT,
+    
     Year INT,
+    
     Price DECIMAL(15, 2),
+    
     FOREIGN KEY (ManufacturerID) REFERENCES Manufacturers(ManufacturerID),
+    
     FOREIGN KEY (ModelID) REFERENCES Models(ModelID)
+    
 );
 
 -- Step 6: Create the Countries table
