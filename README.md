@@ -66,6 +66,103 @@ Remove Car
 
 Description: A stored procedure to delete a car record by its ID.
 
+-- Step 1: Create the database
+CREATE DATABASE IF NOT EXISTS GlobalCarDetails;
+
+-- Step 2: Use the database
+USE GlobalCarDetails;
+
+-- Step 3: Create the Manufacturers table
+CREATE TABLE IF NOT EXISTS Manufacturers (
+    ManufacturerID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Country VARCHAR(100) NOT NULL
+);
+
+-- Step 4: Create the Models table
+CREATE TABLE IF NOT EXISTS Models (
+    ModelID INT AUTO_INCREMENT PRIMARY KEY,
+    ModelName VARCHAR(100) NOT NULL
+);
+
+-- Step 5: Create the Cars table
+CREATE TABLE IF NOT EXISTS Cars (
+    CarID INT AUTO_INCREMENT PRIMARY KEY,
+    ManufacturerID INT,
+    ModelID INT,
+    Year INT,
+    Price DECIMAL(15, 2),
+    FOREIGN KEY (ManufacturerID) REFERENCES Manufacturers(ManufacturerID),
+    FOREIGN KEY (ModelID) REFERENCES Models(ModelID)
+);
+
+-- Step 6: Create the Countries table
+CREATE TABLE IF NOT EXISTS Countries (
+    CountryID INT AUTO_INCREMENT PRIMARY KEY,
+    CountryName VARCHAR(100) NOT NULL
+);
+
+-- Step 7: Create the Car_Sales table
+CREATE TABLE IF NOT EXISTS Car_Sales (
+    SaleID INT AUTO_INCREMENT PRIMARY KEY,
+    CarID INT,
+    SaleDate DATE,
+    SalePrice DECIMAL(15, 2),
+    CountryID INT,
+    FOREIGN KEY (CarID) REFERENCES Cars(CarID),
+    FOREIGN KEY (CountryID) REFERENCES Countries(CountryID)
+);
+
+-- Step 8: Insert data into Manufacturers table
+INSERT INTO Manufacturers (Name, Country)
+VALUES 
+('Audi', 'Germany'),
+('BMW', 'Germany'),
+('Toyota', 'Japan'),
+('Ford', 'USA'),
+('Hyundai', 'South Korea'),
+('Fiat', 'Italy');
+
+-- Step 9: Insert data into Models table
+INSERT INTO Models (ModelName)
+VALUES 
+('Q5'),
+('X5'),
+('Corolla'),
+('Mustang'),
+('Verna'),
+('CR-V');
+
+-- Step 10: Insert data into Cars table
+INSERT INTO Cars (ManufacturerID, ModelID, Year, Price)
+VALUES 
+(1, 1, 1990, 2500000),
+(2, 2, 1987, 3500000),
+(3, 3, 1965, 5000000),
+(4, 4, 1999, 2200000),
+(5, 5, 2000, 3500000),
+(6, 6, 1980, 5500000);
+
+-- Step 11: Insert data into Countries table
+INSERT INTO Countries (CountryName)
+VALUES 
+('Germany'),
+('Japan'),
+('USA'),
+('South Korea'),
+('Italy');
+
+-- Step 12: Insert data into Car_Sales table
+INSERT INTO Car_Sales (CarID, SaleDate, SalePrice, CountryID)
+VALUES 
+(1, '2024-01-15', 1900000, 1),
+(2, '2024-02-20', 2900000, 1),
+(3, '2024-03-10', 430000, 2),
+(4, '2024-01-25', 1700000, 3),
+(5, '2024-02-15', 4300000, 4);
+
+
+
 
 
 
