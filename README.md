@@ -14,42 +14,49 @@ Create Cars Table
 
 **Description:** This table records details about specific cars, including a unique ID, associated manufacturer and model IDs, the production year, and the price of the car. It links to the Manufacturers and Models tables to provide a complete record of each car's origin and specifications.
 Data Insertion
-Insert Manufacturers
 
-Description: Adds new records to the MANUFACTURERS table, specifying the manufacturer’s name and country.
-Insert Models
+## Insert Manufacturers
 
-Description: Adds new records to the Models table, specifying the model name.
-Insert Cars
+**Description:** Adds new records to the MANUFACTURERS table, specifying the manufacturer’s name and country.
+### Insert Models
 
-Description: Inserts new records into the Cars table with information about the manufacturer, model, year of manufacture, and price. This step is essential for populating the database with actual car data.
-Data Retrieval
-Select All Cars
+**Description:** Adds new records to the Models table, specifying the model name.
+### Insert Cars
 
-Description: Retrieves and displays all records from the Cars table, including details of the manufacturer, model, year, and price.
+**Description:** Inserts new records into the Cars table with information about the manufacturer, model, year of manufacture, and price. This step is essential for populating the database with actual car data.
+
+**Data Retrieval**
+
+### Select All Cars
+
+**Description:** Retrieves and displays all records from the Cars table, including details of the manufacturer, model, year, and price.
 Select Cars by Manufacturer
 
-Description: Fetches all cars associated with a specific manufacturer. Useful for viewing all models produced by a particular manufacturer.
+**Description:** Fetches all cars associated with a specific manufacturer. Useful for viewing all models produced by a particular manufacturer.
 Select Cars by Model
 
-Description: Retrieves cars based on a specific model. This helps in finding all cars of a given model.
-Data Updating
-Update Car Price
+**Description:** Retrieves cars based on a specific model. This helps in finding all cars of a given model.
+### Data Updating
+## Update Car Price
 
-Description: Modifies the price of a car in the Cars table based on the car’s ID. This is used for adjusting prices as needed.
-Update Car Year
+**Description:** Modifies the price of a car in the Cars table based on the car’s ID. This is used for adjusting prices as needed.
 
-Description: Updates the production year of a car. This helps in correcting or updating information about the car’s manufacturing year.
-Data Deletion
-Delete Car
+## Update Car Year
 
-Description: Removes a specific car record from the Cars table based on the car’s ID. This is used for deleting obsolete or incorrect entries.
+**Description:** Updates the production year of a car. This helps in correcting or updating information about the car’s manufacturing year.
+
+### Data Deletion
+## Delete Car
+
+**Description:** Removes a specific car record from the Cars table based on the car’s ID. This is used for deleting obsolete or incorrect entries.
 Delete Model
 
-Description: Deletes a car model from the Models table. This might be used if a model is discontinued or needs to be removed for other reasons.
+**Description:** Deletes a car model from the Models table. This might be used if a model is discontinued or needs to be removed for other reasons.
 Delete Manufacturer
 
-Description: Removes a manufacturer record from the MANUFACTURERS table. This might be necessary if a manufacturer is no longer relevant or was added by mistake.
+**Description:** Removes a manufacturer record from the MANUFACTURERS table. This might be necessary if a manufacturer is no longer relevant or was added by mistake.
+
+
 Stored Procedures
 Add Manufacturer
 
