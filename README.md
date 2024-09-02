@@ -104,14 +104,16 @@ CREATE TABLE IF NOT EXISTS Manufacturers
   Country VARCHAR(100) NOT NULL
 );
 
--- Step 4: Create the Models table
-CREATE TABLE IF NOT EXISTS Models (
-    ModelID INT AUTO_INCREMENT PRIMARY KEY,
-    ModelName VARCHAR(100) NOT NULL
+# Step 4: Create the Models table
+CREATE TABLE IF NOT EXISTS Models
+(
+  ModelID INT AUTO_INCREMENT PRIMARY KEY,
+  ModelName VARCHAR(100) NOT NULL
 );
 
--- Step 5: Create the Cars table
-CREATE TABLE IF NOT EXISTS Cars (
+# Step 5: Create the Cars table
+CREATE TABLE IF NOT EXISTS Cars
+(
     CarID INT AUTO_INCREMENT PRIMARY KEY,
     ManufacturerID INT,
     ModelID INT,
