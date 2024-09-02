@@ -1,17 +1,18 @@
 # SQL Queries and Procedures Usage Guide
-Database and Table Creation
-Create Database
+### Database and Table Creation
 
-Description: This step initializes a new database called GlobalCarDetails. This is the first step in setting up a structured environment for storing car-related data.
+**Create Database**
+
+**Description:** This step initializes a new database called GlobalCarDetails. This is the first step in setting up a structured environment for storing car-related data.
 Create Manufacturers Table
 
-Description: This table stores information about car manufacturers, including a unique ID, the manufacturer's name, and the country of origin. This table serves as a reference for car manufacturers.
+**Description:** This table stores information about car manufacturers, including a unique ID, the manufacturer's name, and the country of origin. This table serves as a reference for car manufacturers.
 Create Models Table
 
-Description: This table keeps track of car models with a unique ID and model name. It is used to catalog the different car models available.
+**Description:** This table keeps track of car models with a unique ID and model name. It is used to catalog the different car models available.
 Create Cars Table
 
-Description: This table records details about specific cars, including a unique ID, associated manufacturer and model IDs, the production year, and the price of the car. It links to the Manufacturers and Models tables to provide a complete record of each car's origin and specifications.
+**Description:** This table records details about specific cars, including a unique ID, associated manufacturer and model IDs, the production year, and the price of the car. It links to the Manufacturers and Models tables to provide a complete record of each car's origin and specifications.
 Data Insertion
 Insert Manufacturers
 
