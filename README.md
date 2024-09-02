@@ -315,3 +315,241 @@ SELECT Cars.*, Car_Sales.SaleDate
 FROM Cars
 INNER JOIN Car_Sales ON Cars.CarID = Car_Sales.CarID
 WHERE Car_Sales.SaleDate = (SELECT MAX(SaleDate) FROM Car_Sales);
+
+
+-- Query41: Find the total number of cars sold in each country
+SELECT Countries.CountryName, COUNT(Car_Sales.SaleID) AS TotalSales
+FROM Car_Sales
+INNER JOIN Countries ON Car_Sales.CountryID = Countries.CountryID
+GROUP BY Countries.CountryName;
+
+-- Query42: Retrieve the car models that have the highest average sale price
+SELECT Models.ModelName, AVG(Car_Sales.SalePrice) AS AvgSalePrice
+FROM Car_Sales
+INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+INNER JOIN Models ON Cars.ModelID = Models.ModelID
+GROUP BY Models.ModelName
+ORDER BY AvgSalePrice DESC
+LIMIT 1;
+
+-- Query43: List all manufacturers along with the number of cars they have in the database
+SELECT Manufacturers.Name AS ManufacturerName, COUNT(Cars.CarID) AS CarCount
+FROM Manufacturers
+LEFT JOIN Cars ON Manufacturers.ManufacturerID = Cars.ManufacturerID
+GROUP BY Manufacturers.Name;
+
+-- Query44: Find the most recent sale date for each manufacturer
+SELECT Manufacturers.Name AS ManufacturerName, MAX(Car_Sales.SaleDate) AS LatestSaleDate
+FROM Car_Sales
+INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+INNER JOIN Manufacturers ON Cars.ManufacturerID = Manufacturers.ManufacturerID
+GROUP BY Manufacturers.Name;
+
+-- Query45: Retrieve the average price of cars for each manufacturer
+SELECT Manufacturers.Name AS ManufacturerName, AVG(Cars.Price) AS AvgCarPrice
+FROM Cars
+INNER JOIN Manufacturers ON Cars.ManufacturerID = Manufacturers.ManufacturerID
+GROUP BY Manufacturers.Name;
+
+-- Query46: List the top 3 most expensive cars ever sold
+SELECT Car_Sales.CarID, Cars.Price, Car_Sales.SalePrice
+FROM Car_Sales
+INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+ORDER BY Car_Sales.SalePrice DESC
+LIMIT 3;
+
+-- Query47: Find all manufacturers that have cars sold in more than 3 different countries
+SELECT Manufacturers.Name AS ManufacturerName, COUNT(DISTINCT Car_Sales.CountryID) AS CountryCount
+FROM Car_Sales
+INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+INNER JOIN Manufacturers ON Cars.ManufacturerID = Manufacturers.ManufacturerID
+GROUP BY Manufacturers.Name
+HAVING CountryCount > 3;
+
+-- Query48: Retrieve the total sales amount for each car model, sorted by total sales in descending order
+SELECT Models.ModelName, SUM(Car_Sales.SalePrice) AS TotalSales
+FROM Car_Sales
+INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+INNER JOIN Models ON Cars.ModelID = Models.ModelID
+GROUP BY Models.ModelName
+ORDER BY TotalSales DESC;
+
+-- Query49: Show the car models that have never been sold
+SELECT Models.ModelName
+FROM Models
+LEFT JOIN Cars ON Models.ModelID = Cars.ModelID
+LEFT JOIN Car_Sales ON Cars.CarID = Car_Sales.CarID
+WHERE Car_Sales.SaleID IS NULL;
+
+-- Query50: Find the average number of sales per car model
+SELECT AVG(SalesCount) AS AvgSalesPerModel
+FROM (SELECT Cars.ModelID, COUNT(Car_Sales.SaleID) AS SalesCount
+      FROM Car_Sales
+      INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+      GROUP BY Cars.ModelID) AS ModelSalesCounts;
+
+-- Query51: Retrieve the manufacturer with the lowest average car price
+SELECT Manufacturers.Name AS ManufacturerName, AVG(Cars.Price) AS AvgCarPrice
+FROM Cars
+INNER JOIN Manufacturers ON Cars.ManufacturerID = Manufacturers.ManufacturerID
+GROUP BY Manufacturers.Name
+ORDER BY AvgCarPrice ASC
+LIMIT 1;
+
+-- Query52: List all sales details along with the manufacturer's name and country
+SELECT Car_Sales.SaleID, Car_Sales.SaleDate, Car_Sales.SalePrice, Manufacturers.Name AS ManufacturerName, Countries.CountryName
+FROM Car_Sales
+INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+INNER JOIN Manufacturers ON Cars.ManufacturerID = Manufacturers.ManufacturerID
+INNER JOIN Countries ON Car_Sales.CountryID = Countries.CountryID;
+
+-- Query53: Find the total number of unique car models sold in each country
+SELECT Countries.CountryName, COUNT(DISTINCT Cars.ModelID) AS UniqueModelsSold
+FROM Car_Sales
+INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+INNER JOIN Countries ON Car_Sales.CountryID = Countries.CountryID
+GROUP BY Countries.CountryName;
+
+-- Query54: Retrieve the car model with the highest number of sales
+SELECT Models.ModelName, COUNT(Car_Sales.SaleID) AS SalesCount
+FROM Car_Sales
+INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+INNER JOIN Models ON Cars.ModelID = Models.ModelID
+GROUP BY Models.ModelName
+ORDER BY SalesCount DESC
+LIMIT 1;
+
+-- Query55: Find the number of cars sold in each year, and list them in descending order
+SELECT YEAR(SaleDate) AS SaleYear, COUNT(SaleID) AS NumberOfSales
+FROM Car_Sales
+GROUP BY YEAR(SaleDate)
+ORDER BY NumberOfSales DESC;
+
+-- Query56: Display the total sales revenue for each manufacturer
+SELECT Manufacturers.Name AS ManufacturerName, SUM(Car_Sales.SalePrice) AS TotalSalesRevenue
+FROM Car_Sales
+INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+INNER JOIN Manufacturers ON Cars.ManufacturerID = Manufacturers.ManufacturerID
+GROUP BY Manufacturers.Name;
+
+-- Query57: Find the car model with the highest average sale price in each country
+SELECT Countries.CountryName, Models.ModelName, AVG(Car_Sales.SalePrice) AS AvgSalePrice
+FROM Car_Sales
+INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+INNER JOIN Models ON Cars.ModelID = Models.ModelID
+INNER JOIN Countries ON Car_Sales.CountryID = Countries.CountryID
+GROUP BY Countries.CountryName, Models.ModelName
+HAVING AvgSalePrice = (SELECT MAX(AvgSalePrice)
+                       FROM (SELECT Countries.CountryName, Models.ModelName, AVG(Car_Sales.SalePrice) AS AvgSalePrice
+                             FROM Car_Sales
+                             INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+                             INNER JOIN Models ON Cars.ModelID = Models.ModelID
+                             INNER JOIN Countries ON Car_Sales.CountryID = Countries.CountryID
+                             GROUP BY Countries.CountryName, Models.ModelName) AS ModelPrices
+                       WHERE ModelPrices.CountryName = Countries.CountryName);
+
+-- Query58: List the countries that have sold cars with an average sale price above 2,000,000
+SELECT Countries.CountryName
+FROM Car_Sales
+INNER JOIN Countries ON Car_Sales.CountryID = Countries.CountryID
+GROUP BY Countries.CountryName
+HAVING AVG(Car_Sales.SalePrice) > 2000000;
+
+-- Query59: Retrieve the list of manufacturers with cars sold in every country
+SELECT Manufacturers.Name AS ManufacturerName
+FROM Manufacturers
+WHERE NOT EXISTS (SELECT * 
+                  FROM Countries
+                  WHERE NOT EXISTS (SELECT *
+                                    FROM Car_Sales
+                                    INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+                                    WHERE Cars.ManufacturerID = Manufacturers.ManufacturerID
+                                      AND Car_Sales.CountryID = Countries.CountryID));
+
+-- Query60: Find the median sale price of cars
+SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY SalePrice) AS MedianSalePrice
+FROM Car_Sales;
+
+
+-- Creating a temporary table for sales data by manufacturer in 2024
+CREATE TEMPORARY TABLE Temp_Sales_By_Manufacturer_2024 AS
+SELECT Manufacturers.Name AS ManufacturerName, COUNT(Car_Sales.CarID) AS CarsSold
+FROM Car_Sales
+INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+INNER JOIN Manufacturers ON Cars.ManufacturerID = Manufacturers.ManufacturerID
+WHERE YEAR(Car_Sales.SaleDate) = 2024
+GROUP BY Manufacturers.Name;
+
+-- Example usage of the temporary table
+SELECT * FROM Temp_Sales_By_Manufacturer_2024;
+
+-- Dropping the temporary table
+DROP TEMPORARY TABLE IF EXISTS Temp_Sales_By_Manufacturer_2024;
+
+-- Creating a stored procedure to retrieve car sales by year
+DELIMITER //
+
+CREATE PROCEDURE GetCarSalesByYear(IN salesYear INT)
+BEGIN
+    SELECT Car_Sales.SaleID, Car_Sales.CarID, Car_Sales.SaleDate, Car_Sales.SalePrice, Countries.CountryName
+    FROM Car_Sales
+    INNER JOIN Cars ON Car_Sales.CarID = Cars.CarID
+    INNER JOIN Countries ON Car_Sales.CountryID = Countries.CountryID
+    WHERE YEAR(Car_Sales.SaleDate) = salesYear;
+END //
+
+DELIMITER ;
+
+-- Executing the stored procedure
+CALL GetCarSalesByYear(2024);
+
+-- Creating a stored procedure to get total cars sold by year
+DELIMITER //
+
+CREATE PROCEDURE GetTotalCarsSoldByYear(IN salesYear INT, OUT totalCarsSold INT)
+BEGIN
+    SELECT COUNT(*) INTO totalCarsSold
+    FROM Car_Sales
+    WHERE YEAR(SaleDate) = salesYear;
+END //
+
+DELIMITER ;
+
+-- Declaring a variable to store the output and calling the stored procedure
+SET @totalCarsSold = 0;
+CALL GetTotalCarsSoldByYear(2024, @totalCarsSold);
+SELECT @totalCarsSold;
+
+-- Creating a stored procedure to insert a new car sale
+DELIMITER //
+
+CREATE PROCEDURE InsertCarSale(
+    IN carID INT,
+    IN saleDate DATE,
+    IN salePrice DECIMAL(15,2),
+    IN countryID INT
+)
+BEGIN
+    INSERT INTO Car_Sales (CarID, SaleDate, SalePrice, CountryID)
+    VALUES (carID, saleDate, salePrice, countryID);
+END //
+
+DELIMITER ;
+
+-- Executing the insert procedure
+CALL InsertCarSale(1, '2024-08-30', 2500000, 12);
+
+-- Creating a stored procedure with conditional logic to update car prices
+DELIMITER //
+
+CREATE PROCEDURE UpdateCarPrices(IN minYear INT, IN priceIncrease DECIMAL(15,2))
+BEGIN
+    UPDATE Cars
+    SET Price = Price + priceIncrease
+    WHERE Year >= minYear;
+END //
+
+DELIMITER ;
+
+-- Executing the update procedure to increase prices for cars manufactured in or after 2015 by $500,000
+CALL UpdateCarPrices(2015, 500000);
