@@ -89,11 +89,11 @@
 
 - **Description:** A stored procedure to delete a car record by its ID.
 
-# -- Step 1: Create the database
-CREATE DATABASE IF NOT EXISTS GlobalCarDetails;
+# Step 1: Create the database
+**CREATE DATABASE IF NOT EXISTS GlobalCarDetails;**
 
--- Step 2: Use the database
-USE GlobalCarDetails;
+# Step 2: Use the database
+**USE GlobalCarDetails;**
 
 -- Step 3: Create the Manufacturers table
 CREATE TABLE IF NOT EXISTS Manufacturers (
