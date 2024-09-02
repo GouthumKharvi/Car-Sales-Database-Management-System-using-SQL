@@ -2,12 +2,15 @@
 ### Database and Table Creation
 
 ## Create Database
-
 **Description:** This step initializes a new database called GlobalCarDetails. This is the first step in setting up a structured environment for storing car-related data.
-Create Manufacturers Table
+
+
+## Create Manufacturers Table
 
 **Description:** This table stores information about car manufacturers, including a unique ID, the manufacturer's name, and the country of origin. This table serves as a reference for car manufacturers.
-Create Models Table
+
+
+## Create Models Table
 
 **Description:** This table keeps track of car models with a unique ID and model name. It is used to catalog the different car models available.
 Create Cars Table
