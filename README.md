@@ -1,4 +1,4 @@
-SQL Queries and Procedures Usage Guide
+# SQL Queries and Procedures Usage Guide
 Database and Table Creation
 Create Database
 
