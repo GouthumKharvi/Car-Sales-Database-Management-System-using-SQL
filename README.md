@@ -22,11 +22,11 @@
 
 ## Insert Manufacturers
 - **Description:** Adds new records to the MANUFACTURERS table, specifying the manufacturer’s name and country.
-- 
+
 ## Insert Models
 
 - **Description:** Adds new records to the Models table, specifying the model name.
-- 
+
 ## Insert Cars
 
 - **Description:** Inserts new records into the Cars table with information about the manufacturer, model, year of manufacture, and price. This step is essential for populating the database with actual car data.
@@ -89,7 +89,7 @@
 
 - **Description:** A stored procedure to delete a car record by its ID.
 
--- Step 1: Create the database
+# -- Step 1: Create the database
 CREATE DATABASE IF NOT EXISTS GlobalCarDetails;
 
 -- Step 2: Use the database
